@@ -1,3 +1,6 @@
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import time
+import json
 
 import argparse
 import sys
@@ -13,15 +16,6 @@ import PIL.Image
 
 import dnnlib
 import dnnlib.tflib as tflib
-
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
-# import moviepy.editor
-# from opensimplex import OpenSimplex
-
-import warnings # mostly numpy warnings for me
-warnings.filterwarnings('ignore', category=FutureWarning)
-warnings.filterwarnings('ignore', category=DeprecationWarning)
-
 
 def generate_image(Gs, seed, truncation_psi):
     """Generate an image
