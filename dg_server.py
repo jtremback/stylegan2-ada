@@ -17,7 +17,7 @@ import PIL.Image
 
 import dnnlib
 import dnnlib.tflib as tflib
-from deep_gems import lib
+import dg_lib
 
 
 def startServer(network_pkl):

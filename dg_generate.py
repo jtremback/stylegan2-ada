@@ -5,7 +5,7 @@ import pickle
 
 import dnnlib
 import dnnlib.tflib as tflib
-from deep_gems import lib
+import dg_lib
 
 
 def generate_image(network_pkl, seed, truncation_psi, outdir):
