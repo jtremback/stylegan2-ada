@@ -20,7 +20,7 @@ import dnnlib.tflib as tflib
 import dg_lib
 
 
-def startServer(network_pkl):
+def start_server(network_pkl):
     tflib.init_tf()
     print('Loading networks from "%s"...' % network_pkl)
     with dnnlib.util.open_url(network_pkl) as fp:
@@ -28,10 +28,11 @@ def startServer(network_pkl):
 
     class GemServer(BaseHTTPRequestHandler):
         def do_GET(self):
-            numbers = json.loads(self.path)
-            image = lib.generate_image(Gs, numbers[0:6], numbers[6])
-            image.save(f'./out.jpg', optimize=True, quality=85)
-            content = open("./out.jpg", 'rb')
+            print(self.path[1:])
+            numbers = json.loads(self.path[1:])
+            image = dg_lib.generate_image(Gs, numbers[0:4], numbers[4])
+            image.save(f'/tmp/out.jpg', optimize=True, quality=85)
+            content = open("/tmp/out.jpg", 'rb')
 
             self.send_response(200)
             self.send_header("Content-type", "text/html")
@@ -56,29 +57,39 @@ def startServer(network_pkl):
 # ----------------------------------------------------------------------------
 
 def main():
-    parser = argparse.ArgumentParser(
-        description='Set up a server to generate images using pretrained network pickle.',
-        formatter_class=argparse.RawDescriptionHelpFormatter
-    )
 
-    subparsers = parser.add_subparsers(help='Sub-commands', dest='command')
-
-    start_server = subparsers.add_parser(
-        'start-server', help='Start server')
-    start_server.add_argument(
+    parser = argparse.ArgumentParser(description='Set up a server to generate images using pretrained network pickle.')
+    
+    parser.add_argument(
         '--network', help='Network pickle filename', dest='network_pkl', required=True)
-    start_server.set_defaults(func=startServer)
 
     args = parser.parse_args()
-    kwargs = vars(args)
-    subcmd = kwargs.pop('command')
 
-    if subcmd is None:
-        print('Error: missing subcommand.  Re-run with --help for usage.')
-        sys.exit(1)
+    start_server(args.network_pkl)
 
-    func = kwargs.pop('func')
-    func(**kwargs)
+    # parser = argparse.ArgumentParser(
+    #     description='Set up a server to generate images using pretrained network pickle.',
+    #     formatter_class=argparse.RawDescriptionHelpFormatter
+    # )
+
+    # subparsers = parser.add_subparsers(help='Sub-commands', dest='command')
+
+    # start_server = subparsers.add_parser(
+    #     'start-server', help='Start server')
+    # start_server.add_argument(
+    #     '--network', help='Network pickle filename', dest='network_pkl', required=True)
+    # start_server.set_defaults(func=startServer)
+
+    # args = parser.parse_args()
+    # kwargs = vars(args)
+    # subcmd = kwargs.pop('command')
+
+    # if subcmd is None:
+    #     print('Error: missing subcommand.  Re-run with --help for usage.')
+    #     sys.exit(1)
+
+    # func = kwargs.pop('func')
+    # func(**kwargs)
 
 # ----------------------------------------------------------------------------
 
