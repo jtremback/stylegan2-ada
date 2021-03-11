@@ -48,8 +48,9 @@ def start_server(network_pkl):
 
 def main():
 
-    parser = argparse.ArgumentParser(description='Set up a server to generate images using pretrained network pickle.')
-    
+    parser = argparse.ArgumentParser(
+        description='Set up a server to generate images using pretrained network pickle.')
+
     parser.add_argument(
         '--network', help='Network pickle filename', dest='network_pkl', required=True)
 
