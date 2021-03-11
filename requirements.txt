@@ -1,5 +1,0 @@
-scipy
-pillow
-requests
-tensorflow==1.15
-moviepy

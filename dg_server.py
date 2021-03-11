@@ -1,19 +1,9 @@
-import warnings  # mostly numpy warnings for me
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import time
 import json
 
 import argparse
-import sys
-import os
-import subprocess
 import pickle
-import re
-
-import scipy
-import numpy as np
-from numpy import linalg
-import PIL.Image
 
 import dnnlib
 import dnnlib.tflib as tflib
