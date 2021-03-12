@@ -58,30 +58,6 @@ def main():
 
     start_server(args.network_pkl)
 
-    # parser = argparse.ArgumentParser(
-    #     description='Set up a server to generate images using pretrained network pickle.',
-    #     formatter_class=argparse.RawDescriptionHelpFormatter
-    # )
-
-    # subparsers = parser.add_subparsers(help='Sub-commands', dest='command')
-
-    # start_server = subparsers.add_parser(
-    #     'start-server', help='Start server')
-    # start_server.add_argument(
-    #     '--network', help='Network pickle filename', dest='network_pkl', required=True)
-    # start_server.set_defaults(func=startServer)
-
-    # args = parser.parse_args()
-    # kwargs = vars(args)
-    # subcmd = kwargs.pop('command')
-
-    # if subcmd is None:
-    #     print('Error: missing subcommand.  Re-run with --help for usage.')
-    #     sys.exit(1)
-
-    # func = kwargs.pop('func')
-    # func(**kwargs)
-
 # ----------------------------------------------------------------------------
 
 
