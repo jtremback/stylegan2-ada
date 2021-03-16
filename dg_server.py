@@ -29,7 +29,7 @@ def start_server(network_pkl):
             self.end_headers()
             self.wfile.write(content.read())
 
-    hostName = "localhost"
+    hostName = "0.0.0.0"
     hostPort = 9000
 
     gemServer = HTTPServer((hostName, hostPort), GemServer)
