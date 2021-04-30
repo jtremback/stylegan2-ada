@@ -20,8 +20,11 @@ def start_server(network_pkl):
         def do_GET(self):
             print(self.path[1:])
             numbers = json.loads(self.path[1:])
-            image = dg_lib.generate_image(Gs, numbers[0:4], numbers[4])
-            image.save(f'/tmp/out.jpg', optimize=True, quality=85)
+            # we take the 1/2 exponent of PSI to make a bigger spread in gem values
+            # for example, 3 truncation_psi costs 900 PSI, not 300
+            truncation_psi = numbers[4] ** (1/2)
+            image = dg_lib.generate_image(Gs, numbers[0:4], truncation_psi)
+            image.save(f'/tmp/out.jpg', optimize=True, quality=95)
             content = open("/tmp/out.jpg", 'rb')
 
             self.send_response(200)
