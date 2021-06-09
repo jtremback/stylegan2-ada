@@ -26,8 +26,6 @@ def generate_image(network_pkl, tokenId, outdir):
 
     truncation_psi = (int(t_i[32:64], 16) / 100000000000000000000) ** (3/5)
 
-    network_pkl = 'network-snapshot.pkl'
-
     tflib.init_tf()
     print('Loading networks from "%s"...' % network_pkl)
     with dnnlib.util.open_url(network_pkl) as fp:
